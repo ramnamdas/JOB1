@@ -30,7 +30,7 @@ provider "aws" {
           }
         }
 
-        module "security_group" {
+        module "elastic_sec" {
           source = "terraform-aws-modules/security-group/aws"
 
           name        = "elastic_sec"
@@ -43,7 +43,7 @@ provider "aws" {
         }
 
 
-        module "ec2" {
+        module "elastic" {
           source = "terraform-aws-modules/ec2-instance/aws"
 
           instance_count = 1
@@ -52,12 +52,12 @@ provider "aws" {
           ami                         = "${data.aws_ami.amazon_linux.id}"
           instance_type               = "t2.medium"
           subnet_id                   = "${element(data.aws_subnet_ids.all.ids, 0)}"
-          vpc_security_group_ids      = ["${module.security_group.this_security_group_id}"]
+          vpc_security_group_ids      = ["${module.elastic_sec.this_security_group_id}"]
           associate_public_ip_address = true
           key_name                    = "om2"
         }
 
-module "security_group" {
+        module "kibana_sec" {
           source = "terraform-aws-modules/security-group/aws"
 
           name        = "kibana_sec"
@@ -70,7 +70,7 @@ module "security_group" {
         }
 
 
-        module "ec2_kib" {
+        module "kibana" {
           source = "terraform-aws-modules/ec2-instance/aws"
 
           instance_count = 1
@@ -79,12 +79,12 @@ module "security_group" {
           ami                         = "${data.aws_ami.amazon_linux.id}"
           instance_type               = "t2.medium"
           subnet_id                   = "${element(data.aws_subnet_ids.all.ids, 0)}"
-          vpc_security_group_ids      = ["${module.security_group.this_security_group_id}"]
+          vpc_security_group_ids      = ["${module.kibana_sec.this_security_group_id}"]
           associate_public_ip_address = true
           key_name                    = "om2"
         }
 
-	module "security_group" {
+        module "log_sec" {
           source = "terraform-aws-modules/security-group/aws"
 
           name        = "logstash_sec"
@@ -97,7 +97,7 @@ module "security_group" {
         }
 
 
-        module "ec2_log" {
+        module "logstash" {
           source = "terraform-aws-modules/ec2-instance/aws"
 
           instance_count = 1
@@ -106,7 +106,8 @@ module "security_group" {
           ami                         = "${data.aws_ami.amazon_linux.id}"
           instance_type               = "t2.micro"
           subnet_id                   = "${element(data.aws_subnet_ids.all.ids, 0)}"
-          vpc_security_group_ids      = ["${module.security_group.this_security_group_id}"]
+          vpc_security_group_ids      = ["${module.log_sec.this_security_group_id}"]
           associate_public_ip_address = true
           key_name                    = "om2"
         }
+~                                                                                                                                                                                                                                                                                                                                                                                                                                            
