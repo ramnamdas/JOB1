@@ -30,7 +30,7 @@ provider "aws" {
           }
         }
 
-        module "security_group" {
+        module "security_group_log" {
           source = "terraform-aws-modules/security-group/aws"
 
           name        = "logstash_sec"
@@ -43,7 +43,7 @@ provider "aws" {
         }
 
 
-        module "ec2" {
+        module "ec2_log" {
           source = "terraform-aws-modules/ec2-instance/aws"
 
           instance_count = 1
