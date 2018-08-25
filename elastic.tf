@@ -30,7 +30,7 @@ provider "aws" {
           }
         }
 
-        module "security_group_el" {
+        module "security_group" {
           source = "terraform-aws-modules/security-group/aws"
 
           name        = "elastic_sec"
@@ -43,7 +43,7 @@ provider "aws" {
         }
 
 
-        module "ec2_el" {
+        module "ec2" {
           source = "terraform-aws-modules/ec2-instance/aws"
 
           instance_count = 1
@@ -57,7 +57,7 @@ provider "aws" {
           key_name                    = "om2"
         }
 
-module "security_group_kib" {
+module "security_group" {
           source = "terraform-aws-modules/security-group/aws"
 
           name        = "kibana_sec"
@@ -84,7 +84,7 @@ module "security_group_kib" {
           key_name                    = "om2"
         }
 
-	module "security_group_log" {
+	module "security_group" {
           source = "terraform-aws-modules/security-group/aws"
 
           name        = "logstash_sec"
