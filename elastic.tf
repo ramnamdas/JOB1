@@ -109,5 +109,4 @@ provider "aws" {
           vpc_security_group_ids      = ["${module.log_sec.this_security_group_id}"]
           associate_public_ip_address = true
           key_name                    = "om2"
-        }
-~                                                                                                                                                                                                                                                                                                                                                                                                                                            
+        }                                                                                                                                                                                                                                                                                                                                                                                                                                          
