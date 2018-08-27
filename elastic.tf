@@ -1,7 +1,13 @@
 provider "aws" {
           region = "us-east-1"
         }
-
+terraform {
+  backend "s3" {
+    bucket = "mybucketom"
+    key    = "harshal/terraform.tfstate"
+    region = "us-east-1"
+  }
+}
         data "aws_vpc" "default" {
           default = true
         }
